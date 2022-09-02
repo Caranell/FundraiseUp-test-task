@@ -12,8 +12,6 @@ module.exports = {
   connectToDB: async () => {
     const connection = await client.connect();
     dbConnection = connection.db(DB_NAME);
-    console.log('conn');
-    // console.log('db', db)
     return client;
   },
   getDbConnection: () => dbConnection,
