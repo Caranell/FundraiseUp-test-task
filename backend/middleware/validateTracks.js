@@ -1,5 +1,6 @@
-const isNonEmptyString = (str) => isString(str) && Boolean(str);
 const isString = (str) => typeof (str) === 'string';
+const isNonEmptyString = (str) => isString(str) && Boolean(str);
+const isValidDate = (date) => (new Date(date) !== 'Invalid Date') && !Number.isNaN(new Date(date));
 
 const checkIsTrackObjectValid = (track) => {
   const {
@@ -9,10 +10,9 @@ const checkIsTrackObjectValid = (track) => {
   const isUrlValid = isNonEmptyString(url);
   const isTitleValid = isNonEmptyString(title);
   const areTagsValid = Array.isArray(tags) && tags.every((tag) => isString(tag));
-  // FIXME check timestamp
+  const isDateValid = isValidDate(ts);
 
-  
-  return isEventValid && isUrlValid && isTitleValid && areTagsValid;
+  return isEventValid && isUrlValid && isTitleValid && areTagsValid && isDateValid;
 };
 
 module.exports = (req, res, next) => {
