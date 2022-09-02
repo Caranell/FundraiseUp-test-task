@@ -11,9 +11,9 @@ router.post('/', async (_, res) => {
   const db = getDbConnection();
 
   const tracksCollection = db.collection('Tracks');
-  const result = await tracksCollection.insertMany(tracks);
-
-  res.status(200).send({ insertedTracks: result.insertedCount });
+  // apparently we dont need to wait for insert to finish
+  tracksCollection.insertMany(tracks);
+  res.sendStatus(200);
 });
 
 module.exports = router;
